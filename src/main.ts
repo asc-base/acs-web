@@ -1,11 +1,16 @@
 import { NestFactory } from '@nestjs/core'
+import helmet from 'helmet'
+import { HttpExceptionFilter } from 'src/exceptions/http.exception.filter'
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor'
 import { AppModule } from './app.module'
 
 async function bootstrap(): Promise<void> {
-    const app = await NestFactory.create(AppModule)
+    const app = await NestFactory.create(AppModule, { cors: true })
 
     const port = process.env.APP_PORT || 9001
+
+    // middleware
+    app.use(helmet())
 
     // global prefix
     app.setGlobalPrefix('/api')
@@ -13,6 +18,9 @@ async function bootstrap(): Promise<void> {
     // global interceptors
     // transform
     app.useGlobalInterceptors(new TransformInterceptor())
+
+    // global filters
+    app.useGlobalFilters(new HttpExceptionFilter())
 
     await app.listen(port)
 }
