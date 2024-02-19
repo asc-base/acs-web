@@ -1,0 +1,16 @@
+version: '3'
+services:
+    psql:
+        image: postgres:15.3-alpine
+        container_name: psql_acs_web
+        restart: always
+        ports:
+            - '5432:5432'
+        environment:
+            POSTGRES_USER: acs_web_username
+            POSTGRES_PASSWORD: acs_web_pass
+            POSTGRES_DB: acs_web
+            TZ: 'GMT+7'
+            PGTZ: 'Asia/Bangkok'
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
