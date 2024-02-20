@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import helmet from 'helmet'
 import { HttpExceptionFilter } from 'src/exceptions/http.exception.filter'
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor'
@@ -21,6 +22,15 @@ async function bootstrap(): Promise<void> {
 
     // global filters
     app.useGlobalFilters(new HttpExceptionFilter())
+
+    // swagger api
+    const config = new DocumentBuilder()
+        .setTitle('The ACS-Web API')
+        .setDescription('The ACS-Web API description')
+        .setVersion('1.0')
+        .build()
+    const document = SwaggerModule.createDocument(app, config)
+    SwaggerModule.setup('api/docs', app, document)
 
     await app.listen(port)
 }
