@@ -2,7 +2,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
 import { Response } from 'express'
 
-const { INTERNAL_SERVER_ERROR } = HttpStatus
+const { INTERNAL_SERVER_ERROR, BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND } = HttpStatus
 
 const INTERNAL_SERVER_ERROR_MSG = 'Internal server error'
 
@@ -15,31 +15,29 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const status =
             exception instanceof HttpException ? exception.getStatus() : INTERNAL_SERVER_ERROR
 
-        // switch (status) {
-        //     case BAD_REQUEST:
-        //         message = `Validate Failed : ${JSON.stringify(exception.getResponse())}`
-        //         break
-        //     case UNAUTHORIZED:
-        //         message = `You're not authentication`
-        //         break
-        //     case FORBIDDEN:
-        //         message = `You're not authorized`
-        //         break
-        //     case NOT_FOUND:
-        //         message = `Not found`
-        //         break
-        //     case PAYLOAD_TOO_LARGE:
-        //         message = `File too large`
-        //         break
-        //     default:
-        //         message = `Internal Server Error`
-        //         break
-        // }
+        let message = ''
+        switch (status) {
+            case BAD_REQUEST:
+                message = `Bad Request`
+                break
+            case UNAUTHORIZED:
+                message = `Unauthorized`
+                break
+            case FORBIDDEN:
+                message = `Forbidden`
+                break
+            case NOT_FOUND:
+                message = `Not Found`
+                break
+            default:
+                message = INTERNAL_SERVER_ERROR_MSG
+                break
+        }
 
         response.status(status).json({
             code: status,
-            message: exception.getResponse().message || INTERNAL_SERVER_ERROR_MSG,
-            errors: exception.getResponse().error || INTERNAL_SERVER_ERROR_MSG,
+            message,
+            errors: exception.getResponse() || INTERNAL_SERVER_ERROR_MSG,
         })
     }
 }
