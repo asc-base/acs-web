@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common'
+import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
 import { validate } from 'class-validator'
+import Exception from 'src/interfaces/exception.interface'
 
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
@@ -21,7 +22,7 @@ export class ValidationPipe implements PipeTransform<any> {
                 {} as { [index: string]: string[] },
             )
 
-            throw new BadRequestException(message, message)
+            throw Exception.createBadRequestException(message)
         }
         return value
     }
