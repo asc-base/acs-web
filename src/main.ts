@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import helmet from 'helmet'
 import { HttpExceptionFilter } from 'src/exceptions/http.exception.filter'
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor'
+import { ValidationPipe } from 'src/pipes/validate.pipe'
 import { AppModule } from './app.module'
 
 async function bootstrap(): Promise<void> {
@@ -22,6 +23,9 @@ async function bootstrap(): Promise<void> {
 
     // global filters
     app.useGlobalFilters(new HttpExceptionFilter())
+
+    // global pipes
+    app.useGlobalPipes(new ValidationPipe())
 
     // swagger api
     const config = new DocumentBuilder()
