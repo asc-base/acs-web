@@ -2,9 +2,6 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -20,7 +17,7 @@
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+  [![Sponsors on Open **Collective**](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
@@ -29,33 +26,49 @@
 ## Installation
 
 ```bash
-$ npm install
+npm install or pnpm install
+```
+
+## Running postgres db on docker container
+
+```bash
+docker-compose up -d
+```
+
+## Running migration and generate client for DB
+
+```bash
+# migrate
+$ npm run migrate or pnpm migrate
+
+# generate client
+$ npm run generate or pnpm generate
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ npm run start or pnpm start
 
 # watch mode
-$ npm run start:dev
+$ npm run start:dev or pnpm start:dev
 
 # production mode
-$ npm run start:prod
+$ npm run start:prod or pnpm start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ npm run test or pnpm test
 
 # e2e tests
-$ npm run test:e2e
+$ npm run test:e2e or pnpm test:e2e
 
 # test coverage
-$ npm run test:cov
+$ npm run test:cov or pnpm test:cov
 ```
 
 ## Support
@@ -64,9 +77,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+-   Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+-   Website - [https://nestjs.com](https://nestjs.com/)
+-   Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
