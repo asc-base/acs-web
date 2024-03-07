@@ -13,11 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model example {
+model Example {
   id Int @id @default(autoincrement())  
   name String @db.VarChar(255)
   createdDate DateTime @default(now()) @map("created_date")
   createdBy   Int      @map("created_by")
   updatedDate DateTime @updatedAt @map("updated_date")
   updatedBy   Int?     @map("updated_by")
+
+  @@map("example")
 }
