@@ -14,12 +14,67 @@ datasource db {
 }
 
 model Example {
-  id Int @id @default(autoincrement())  
-  name String @db.VarChar(255)
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
   createdDate DateTime @default(now()) @map("created_date")
   createdBy   Int      @map("created_by")
   updatedDate DateTime @updatedAt @map("updated_date")
   updatedBy   Int?     @map("updated_by")
 
   @@map("example")
+}
+
+model Student {
+  id                      Int      @id @default(autoincrement())
+  user_id                 Int
+  student_code            String   @db.VarChar(255)
+  linkedin                String?  @db.VarChar(255)
+  facebook                String?  @db.VarChar(255)
+  instagram               String?  @db.VarChar(255)
+  github                  String?  @db.VarChar(255)
+  year_of_first_admission Int
+  year_of_completion      Int
+  class_of                String   @db.VarChar(255)
+  created_date            DateTime @default(now()) @map("created_date")
+  updated_date            DateTime @updatedAt @map("updated_date")
+  created_by              Int      @map("created_by")
+  updated_by              Int      @map("updated_by")
+  User                    Users    @relation(fields: [user_id], references: [id])
+
+  @@map("student")
+}
+
+model Users {
+  id           Int       @id @default(autoincrement())
+  username     String    @db.VarChar(255)
+  profile_url  String    @db.VarChar(255)
+  firstname_th String    @db.VarChar(255)
+  lastname_th  String    @db.VarChar(255)
+  firstname_en String    @db.VarChar(255)
+  lastname_en  String    @db.VarChar(255)
+  nickname     String    @db.VarChar(255)
+  email        String    @db.VarChar(255)
+  phone        String    @db.VarChar(255)
+  password     String    @db.VarChar(255)
+  role_id      Int
+  created_date DateTime  @default(now()) @map("created_date")
+  updated_date DateTime  @updatedAt @map("updated_date")
+  created_by   Int       @map("created_by")
+  updated_by   Int       @map("updated_by")
+  Role         Role      @relation(fields: [role_id], references: [id])
+  Student      Student[]
+
+  @@map("users")
+}
+
+model Role {
+  id           Int      @id @default(autoincrement())
+  name         String   @db.VarChar(255)
+  created_date DateTime @default(now()) @map("created_date")
+  updated_date DateTime @updatedAt @map("updated_date")
+  created_by   Int      @map("created_by")
+  updated_by   Int      @map("updated_by")
+  Users        Users[]
+
+  @@map("role")
 }
