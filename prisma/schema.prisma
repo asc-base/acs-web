@@ -34,7 +34,7 @@ model Student {
   github                  String?  @db.Text
   year_of_first_admission Int
   year_of_completion      Int
-  class_of                String   @db.VarChar(255)
+  class_of                String   @db.VarChar(16)
   created_date            DateTime @default(now()) @map("created_date")
   updated_date            DateTime @updatedAt @map("updated_date")
   created_by              Int      @map("created_by")
