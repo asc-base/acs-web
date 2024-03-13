@@ -33,7 +33,7 @@ model Student {
   instagram               String?  @db.Text
   github                  String?  @db.Text
   year_of_first_admission Int
-  year_of_completion      Int
+  year_of_completion      Int?
   class_of                String   @db.VarChar(16)
   created_date            DateTime @default(now()) @map("created_date")
   updated_date            DateTime @updatedAt @map("updated_date")
@@ -46,13 +46,13 @@ model Student {
 
 model Users {
   id           Int       @id @default(autoincrement())
-  username     String    @db.VarChar(255)
-  profile_url  String    @db.Text
-  firstname_th String    @db.VarChar(64)
-  lastname_th  String    @db.VarChar(64)
-  firstname_en String    @db.VarChar(64)
-  lastname_en  String    @db.VarChar(64)
-  nickname     String    @db.VarChar(64)
+  username     String    @db.VarChar(64)
+  profile_url  String?    @db.Text
+  firstname_th String?    @db.VarChar(64)
+  lastname_th  String?    @db.VarChar(64)
+  firstname_en String?    @db.VarChar(64)
+  lastname_en  String?    @db.VarChar(64)
+  nickname     String?    @db.VarChar(64)
   email        String    @db.VarChar(64)
   phone        String    @db.VarChar(10)
   password     String    @db.VarChar(255)
@@ -60,7 +60,7 @@ model Users {
   created_date DateTime  @default(now()) @map("created_date")
   updated_date DateTime  @updatedAt @map("updated_date")
   created_by   Int       @map("created_by")
-  updated_by   Int       @map("updated_by")
+  updated_by   Int?       @map("updated_by")
   Role         Role      @relation(fields: [role_id], references: [id])
   Student      Student[]
 
@@ -73,7 +73,7 @@ model Role {
   created_date DateTime @default(now()) @map("created_date")
   updated_date DateTime @updatedAt @map("updated_date")
   created_by   Int      @map("created_by")
-  updated_by   Int      @map("updated_by")
+  updated_by   Int?      @map("updated_by")
   Users        Users[]
 
   @@map("role")
