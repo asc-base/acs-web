@@ -53,8 +53,8 @@ model Users {
   firstname_en String    @db.VarChar(64)
   lastname_en  String    @db.VarChar(64)
   nickname     String    @db.VarChar(64)
-  email        String    @db.VarChar(255)
-  phone        String    @db.VarChar(255)
+  email        String    @db.VarChar(64)
+  phone        String    @db.VarChar(10)
   password     String    @db.VarChar(255)
   role_id      Int
   created_date DateTime  @default(now()) @map("created_date")
