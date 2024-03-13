@@ -27,11 +27,11 @@ model Example {
 model Student {
   id                      Int      @id @default(autoincrement())
   user_id                 Int
-  student_code            String   @db.VarChar(255)
-  linkedin                String?  @db.VarChar(255)
-  facebook                String?  @db.VarChar(255)
-  instagram               String?  @db.VarChar(255)
-  github                  String?  @db.VarChar(255)
+  student_code            String   @db.VarChar(16)
+  linkedin                String?  @db.Text
+  facebook                String?  @db.Text
+  instagram               String?  @db.Text
+  github                  String?  @db.Text
   year_of_first_admission Int
   year_of_completion      Int
   class_of                String   @db.VarChar(255)
