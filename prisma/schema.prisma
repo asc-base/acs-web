@@ -38,7 +38,7 @@ model Student {
   created_date            DateTime @default(now()) @map("created_date")
   updated_date            DateTime @updatedAt @map("updated_date")
   created_by              Int      @map("created_by")
-  updated_by              Int      @map("updated_by")
+  updated_by              Int?      @map("updated_by")
   User                    Users    @relation(fields: [user_id], references: [id])
 
   @@map("student")
