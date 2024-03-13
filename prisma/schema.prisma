@@ -25,56 +25,56 @@ model Example {
 }
 
 model Student {
-  id                      Int      @id @default(autoincrement())
-  user_id                 Int
-  student_code            String   @db.VarChar(255)
-  linkedin                String?  @db.VarChar(255)
-  facebook                String?  @db.VarChar(255)
-  instagram               String?  @db.VarChar(255)
-  github                  String?  @db.VarChar(255)
-  year_of_first_admission Int
-  year_of_completion      Int
-  class_of                String   @db.VarChar(255)
-  created_date            DateTime @default(now()) @map("created_date")
-  updated_date            DateTime @updatedAt @map("updated_date")
-  created_by              Int      @map("created_by")
-  updated_by              Int      @map("updated_by")
-  User                    Users    @relation(fields: [user_id], references: [id])
+  id                   Int      @id @default(autoincrement())
+  userId               Int      @map("user_id")
+  studentCode          String   @map("student_code") @db.VarChar(16)
+  linkedin             String?  @db.Text
+  facebook             String?  @db.Text
+  instagram            String?  @db.Text
+  github               String?  @db.Text
+  yearOfFirstAdmission Int      @map("year_of_first_admission")
+  yearOfCompletion     Int?     @map("year_of_completion")
+  classOf              String   @map("class_of") @db.VarChar(16)
+  createdDate          DateTime @default(now()) @map("created_date")
+  updatedDate          DateTime @updatedAt @map("updated_date")
+  createdBy            Int      @map("created_by")
+  updatedBY            Int?     @map("updated_by")
+  User                 Users    @relation(fields: [userId], references: [id])
 
   @@map("student")
 }
 
 model Users {
-  id           Int       @id @default(autoincrement())
-  username     String    @db.VarChar(255)
-  profile_url  String    @db.VarChar(255)
-  firstname_th String    @db.VarChar(255)
-  lastname_th  String    @db.VarChar(255)
-  firstname_en String    @db.VarChar(255)
-  lastname_en  String    @db.VarChar(255)
-  nickname     String    @db.VarChar(255)
-  email        String    @db.VarChar(255)
-  phone        String    @db.VarChar(255)
-  password     String    @db.VarChar(255)
-  role_id      Int
-  created_date DateTime  @default(now()) @map("created_date")
-  updated_date DateTime  @updatedAt @map("updated_date")
-  created_by   Int       @map("created_by")
-  updated_by   Int       @map("updated_by")
-  Role         Role      @relation(fields: [role_id], references: [id])
-  Student      Student[]
+  id          Int       @id @default(autoincrement())
+  username    String    @db.VarChar(64)
+  profileUrl  String?   @map("profile_url") @db.Text
+  firstnameTh String?   @map("firstname_th") @db.VarChar(64)
+  lastnameTh  String?   @map("lastname_th") @db.VarChar(64)
+  firstnameEn String?   @map("firstname_en") @db.VarChar(64)
+  lastnameEn  String?   @map("lastname_en") @db.VarChar(64)
+  nickname    String?   @db.VarChar(64)
+  email       String    @db.VarChar(64)
+  phone       String    @db.VarChar(10)
+  password    String    @db.VarChar(255)
+  roleId      Int       @map("role_id")
+  createdDate DateTime  @default(now()) @map("created_date")
+  updatedDate DateTime  @updatedAt @map("updated_date")
+  createdBy   Int       @map("created_by")
+  updatedBy   Int?      @map("updated_by")
+  Role        Role      @relation(fields: [roleId], references: [id])
+  Student     Student[]
 
   @@map("users")
 }
 
 model Role {
-  id           Int      @id @default(autoincrement())
-  name         String   @db.VarChar(255)
-  created_date DateTime @default(now()) @map("created_date")
-  updated_date DateTime @updatedAt @map("updated_date")
-  created_by   Int      @map("created_by")
-  updated_by   Int      @map("updated_by")
-  Users        Users[]
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(64)
+  createdDate DateTime @default(now()) @map("created_date")
+  updatedDate DateTime @updatedAt @map("updated_date")
+  createdBy   Int      @map("created_by")
+  updatedBy   Int?     @map("updated_by")
+  Users       Users[]
 
   @@map("role")
 }
