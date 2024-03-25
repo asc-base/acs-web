@@ -32,7 +32,7 @@ npm install or pnpm install
 ## Running postgres db on docker container
 
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up -d
 ```
 
 ## Running migration and generate client for DB
@@ -43,6 +43,14 @@ $ npm run migrate or pnpm migrate
 
 # generate client
 $ npm run generate or pnpm generate
+```
+
+## Running seed database
+
+```bash
+$ npx seed prisma
+or
+$ npm run seed:dev or pnpm seed:dev
 ```
 
 ## Running the app
