@@ -12,13 +12,6 @@ export class ValidationPipe implements PipeTransform<any> {
             return value
         }
 
-        // Convert numeric strings back to numbers
-        for (const key in value) {
-            if (typeof value[key] === 'string' && !isNaN(Number(value[key]))) {
-                value[key] = Number(value[key])
-            }
-        }
-
         const object = plainToClass(metatype, value)
 
         const errors = await validate(object)
